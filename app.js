@@ -1,12 +1,16 @@
 const game = document.getElementById("game");
 const keys = document.querySelectorAll(".key");
+const gameOverPopup = document.getElementById("game-over");
+const wordRevealEl = document.getElementById("word");
+const playAgainBtn = document.getElementById("play-again-btn");
+const wordNotFoundPopup = document.getElementById("not-found");
 
 let wordLength = 5;
 let lettersEntered = 0;
 let guesses = 0;
 const totalGuesses = 6;
 
-const word = "SHARK";
+let word;
 
 initializeGame(wordLength);
 
@@ -24,11 +28,18 @@ keys.forEach(key => {
     });
 });
 
-function initializeGame(wordLength) {
+playAgainBtn.addEventListener("click", () => {
+    initializeGame(wordLength);
+    gameOverPopup.classList.add("no-display");
+});
+
+async function initializeGame(wordLength) {
+    word = await getRandomWord(wordLength);
     createGame(wordLength);
 }
 
 function createGame(wordLength) {
+    game.innerHTML = "";
     for (let i = 0; i < 6; i++) {
         const gameRow = document.createElement('div');
         gameRow.classList.add('game-row');
@@ -43,8 +54,8 @@ function createGame(wordLength) {
 
 function enterLetter(key) {
     let box = game.children[guesses].children[lettersEntered];
-    box.classList.add("box-filled");
     if (lettersEntered < wordLength) {
+        box.classList.add("box-filled");
         box.textContent = key.toUpperCase();
         lettersEntered++;
     }
@@ -59,11 +70,20 @@ function deleteLetter() {
     box.classList.remove("box-filled");
 }
 
-function guessWord() {
-    if (!(lettersEntered === wordLength) || guesses >= totalGuesses)
+async function guessWord() {
+    if (!(lettersEntered === wordLength))
         return;
 
     let guessRow = game.children[guesses];
+    let guessedWord = '';
+    guessRow.childNodes.forEach(el => guessedWord += el.textContent);
+
+    if (!(await checkWord(guessedWord))) {
+        wordNotFoundPopup.classList.remove("no-display");
+        await setTimeout(() => wordNotFoundPopup.classList.add("no-display"), 2000);
+        return;
+    }
+    
     for (let i = 0; i < wordLength; i++) {
         const box = guessRow.children[i];
         box.classList.add("guessed");
@@ -72,9 +92,6 @@ function guessWord() {
     }
 
     for (let letter of word) {
-        let guessedWord = '';
-        guessRow.childNodes.forEach(el => guessedWord += el.textContent);
-        
         if (guessedWord.includes(letter)) {
             let box = guessRow.children[guessedWord.indexOf(letter)];
             if (!box.classList.contains("bg-green") && !box.classList.contains("bg-yellow"))
@@ -84,6 +101,29 @@ function guessWord() {
 
     guesses++;
     lettersEntered = 0;
+
+    if (guesses >= totalGuesses) {
+        gameOverPopup.classList.remove("no-display");
+        wordRevealEl.textContent = word;
+        return;
+    }
 }
 
+function displayPopup(popup) {
+    popup.classList.remove("no-display");
+}
 
+async function getRandomWord(len) {
+    let apiURL = `https://random-word-api.herokuapp.com/word?length=${len}`;
+    const res = await fetch(apiURL);
+    const word = (await res.json())[0].toUpperCase();
+    console.log(word);
+    return word;
+}
+
+async function checkWord(word) {
+    let apiURL = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
+    const res = await fetch(apiURL);
+    const data = await res.ok;
+    return data;
+}

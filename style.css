@@ -29,6 +29,10 @@ body {
     font-family: var(--font-family-default);
 }
 
+.no-display {
+    display: none !important;
+}
+
 img,
 svg {
     display: block;
@@ -169,6 +173,43 @@ main {
 
 .key.letter {
     text-transform: uppercase;
+}
+
+.popup {
+    display: grid;
+    place-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: var(--clr-white);
+    color: var(--clr-black);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 2px rgba(0,0,0,0.2);
+    width: min(20rem, 75%);
+}
+
+.popup-text {
+    font-size: 1.6rem;
+    font-weight: var(--fw-bold);
+}
+
+#play-again-btn {
+    padding: 0.6rem 1rem;
+    background-color: var(--clr-black);
+    color: var(--clr-white);
+    border: 2px solid var(--clr-black);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+#play-again-btn:hover {
+    background: transparent;
+    color: var(--clr-black);
+    font-weight: var(--fw-bold);
 }
 
 @keyframes beat {
