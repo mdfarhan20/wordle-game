@@ -2,4 +2,4 @@
 
 In this project, I have created the game WORDLE using JavaScript
 
-- View the project here : [Wordle]()
+- View the project here : [Wordle](https://mdfarhan20.github.io/wordle-game/)
