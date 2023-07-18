@@ -34,6 +34,8 @@ playAgainBtn.addEventListener("click", () => {
 });
 
 async function initializeGame(wordLength) {
+    guesses = 0;
+    lettersEntered = 0;
     word = await getRandomWord(wordLength);
     createGame(wordLength);
 }
