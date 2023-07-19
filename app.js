@@ -4,6 +4,9 @@ const gameOverPopup = document.getElementById("game-over");
 const wordRevealEl = document.getElementById("word");
 const playAgainBtn = document.getElementById("play-again-btn");
 const wordNotFoundPopup = document.getElementById("not-found");
+const settingsBtn = document.getElementById("settings-icon");
+const settingsMenu = document.getElementById("settings-menu");
+const closeMenuBtns = document.querySelectorAll(".close-icon"); 
 
 let wordLength = 5;
 let lettersEntered = 0;
@@ -28,9 +31,20 @@ keys.forEach(key => {
     });
 });
 
+settingsBtn.addEventListener("click", () => {
+    settingsMenu.classList.remove("no-display");
+});
+
 playAgainBtn.addEventListener("click", () => {
     initializeGame(wordLength);
     gameOverPopup.classList.add("no-display");
+});
+
+closeMenuBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        const menu = btn.parentNode.parentNode;
+        menu.classList.add("no-display");
+    })
 });
 
 async function initializeGame(wordLength) {

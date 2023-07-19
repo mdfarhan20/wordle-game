@@ -80,6 +80,7 @@ nav {
 }
 
 main {
+    position: relative;
     display: grid;
     gap: 2rem;
     place-items: center;
@@ -128,6 +129,7 @@ main {
 }
 
 .bg-green {
+    color: white;
     background-color: var(--clr-green) !important;
     border-color: var(--clr-green);
 }
@@ -212,6 +214,100 @@ main {
     font-weight: var(--fw-bold);
 }
 
+.menu {
+    --border-radius-amt: 10px;
+    --box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
+    --padding-amt: 2rem;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    translate: -50%;
+    background-color: white;
+    display: grid;
+    gap: 1rem;
+    width: 30rem;
+    max-width: 98%;
+}
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--clr-black);
+    color: var(--clr-white);
+    padding: var(--padding-amt);
+    border-radius: var(--border-radius-amt);
+    box-shadow: var(--box-shadow);
+}
+
+.menu-title {
+    font-size: 1.4rem;
+    font-weight: var(--fw-bold);
+}
+
+.settings {
+    display: grid;
+    gap: 1rem;
+}
+
+.setting {
+    display: grid;
+    gap: 1rem;
+    background-color: white;
+    padding: var(--padding-amt);
+    border-radius: 10px;
+    border-radius: var(--border-radius-amt);
+    box-shadow: var(--box-shadow);
+}
+
+#word-length {
+    display: grid;
+    gap: 1rem; 
+}
+
+.setting-name {
+    color: var(--clr-black);
+    font-weight: var(--fw-bold);
+    font-size: 1.2rem;
+}
+
+.len-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.len-option {
+    flex: 1;
+    text-align: center;
+    background-color: var(--clr-gray-300);
+    border-radius: var(--border-radius-amt);
+    padding-block: 1rem;
+    cursor: pointer;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.len-option:hover {
+    background-color: var(--clr-green);
+    color: white;
+}
+
+.close-icon {
+    fill: var(--clr-white);
+    height: fit-content;
+    max-width: 100%;
+    width: 2.4rem;
+    cursor: pointer;
+    transition: fill 0.2s ease;
+}
+
+.close-icon:hover {
+    fill: var(--clr-gray-300);
+}
+
+
 @keyframes beat {
     50% {
         scale: 1.1;
@@ -247,5 +343,9 @@ main {
         padding: 0.2rem 0.4rem;
         font-size: 0.8rem;
         border-radius: 2px;
+    }
+
+    .menu {
+        --padding-amt: 1rem;
     }
 }
