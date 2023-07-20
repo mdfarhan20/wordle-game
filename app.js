@@ -144,8 +144,9 @@ async function getRandomWord(len) {
     let apiURL = `https://random-word-api.herokuapp.com/word?length=${len}`;
     const res = await fetch(apiURL);
     const word = (await res.json())[0].toUpperCase();
-    console.log(word);
-    return word;
+    if (await checkWord(word))
+        return word;
+    getRandomWord(len);
 }
 
 async function checkWord(word) {
