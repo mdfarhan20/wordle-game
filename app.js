@@ -1,12 +1,14 @@
 const game = document.getElementById("game");
 const keys = document.querySelectorAll(".key");
+const closeMenuBtns = document.querySelectorAll(".close-icon");
+const wordLengthBtns = document.querySelectorAll(".len-option");
+
 const gameOverPopup = document.getElementById("game-over");
 const wordRevealEl = document.getElementById("word");
 const playAgainBtn = document.getElementById("play-again-btn");
 const wordNotFoundPopup = document.getElementById("not-found");
 const settingsBtn = document.getElementById("settings-icon");
 const settingsMenu = document.getElementById("settings-menu");
-const closeMenuBtns = document.querySelectorAll(".close-icon"); 
 
 let wordLength = 5;
 let lettersEntered = 0;
@@ -40,6 +42,14 @@ playAgainBtn.addEventListener("click", () => {
     gameOverPopup.classList.add("no-display");
 });
 
+wordLengthBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        initializeGame(parseInt(btn.textContent));
+        wordLengthBtns.forEach(btn => btn.classList.remove("bg-green"));
+        btn.classList.add("bg-green");
+    });
+})
+
 closeMenuBtns.forEach(btn => {
     btn.addEventListener("click", () => {
         const menu = btn.parentNode.parentNode;
@@ -47,9 +57,12 @@ closeMenuBtns.forEach(btn => {
     })
 });
 
-async function initializeGame(wordLength) {
-    word = await getRandomWord(wordLength);
-    createGame(wordLength);
+async function initializeGame(len) {
+    lettersEntered = 0;
+    guesses = 0;
+    wordLength = len;
+    createGame(len);
+    word = await getRandomWord(len);
 }
 
 function createGame(wordLength) {

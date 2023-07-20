@@ -93,8 +93,7 @@ main {
     --block-gap: 0.5rem;
     display: grid;
     gap: var(--block-gap);
-    width: max(20%, 20rem);
-    max-width: 90%;
+    max-width: 95%;
 }
 
 .game-row {
@@ -112,8 +111,9 @@ main {
     border-radius: 10px;
     height: 100%;
     flex: 1;
+    width: 3.6rem;
     aspect-ratio: 1 / 1;
-    font-size: clamp(1.2rem, 1.8rem, 2.6rem);
+    font-size: 1.6rem;
     color: var(--clr-black);
 }
 
@@ -347,5 +347,16 @@ main {
 
     .menu {
         --padding-amt: 1rem;
+    }
+
+    #game {
+        width: 98%;
+    }
+
+    .game-box {
+        width: fit-content;
+        max-width: 3rem;
+        font-size: 1rem;
+        border-radius: 5px;
     }
 }
