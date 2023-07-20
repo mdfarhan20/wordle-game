@@ -66,8 +66,7 @@ async function initializeGame(len) {
     guesses = 0;
     wordLength = len;
     createGame(len);
-    // word = await getRandomWord(len);
-    word = 'SINUS';
+    word = await getRandomWord(len);
 }
 
 function createGame(wordLength) {
