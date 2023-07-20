@@ -9,7 +9,9 @@ const wordRevealEl = document.getElementById("word");
 const wordNotFoundPopup = document.getElementById("not-found");
 const settingsBtn = document.getElementById("settings-icon");
 const settingsMenu = document.getElementById("settings-menu");
-const gameWonPopup = document.getElementById("game-won")
+const gameWonPopup = document.getElementById("game-won");
+const helpMenu = document.getElementById("help-menu");
+const helpBtn = document.getElementById("help-icon");
 
 let wordLength = 5;
 let lettersEntered = 0;
@@ -35,7 +37,15 @@ keys.forEach(key => {
 });
 
 settingsBtn.addEventListener("click", () => {
+    if (!helpMenu.classList.contains('no-display'))
+        helpMenu.classList.add("no-display");
     settingsMenu.classList.remove("no-display");
+});
+
+helpBtn.addEventListener("click", () => {
+    if (!settingsMenu.classList.contains('no-display'))
+        settingsMenu.classList.add("no-display");
+    helpMenu.classList.remove("no-display");
 });
 
 playAgainBtns.forEach(btn => {

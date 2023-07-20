@@ -219,7 +219,7 @@ main {
     --box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
     --padding-amt: 2rem;
     position: absolute;
-    top: 10%;
+    top: 0;
     left: 50%;
     translate: -50%;
     background-color: white;
@@ -250,7 +250,8 @@ main {
     gap: 1rem;
 }
 
-.setting {
+.setting,
+.help-info {
     display: grid;
     gap: 1rem;
     background-color: white;
@@ -258,6 +259,45 @@ main {
     border-radius: 10px;
     border-radius: var(--border-radius-amt);
     box-shadow: var(--box-shadow);
+    overflow-y: scroll;
+    max-height: 30rem;
+}
+
+.help-info {
+    text-align: center;
+}
+
+.help-info .game-row {
+    gap: 0.5rem;
+}
+
+.help-text {
+    color: var(--clr-gray-500);
+   font-size: 1rem;
+   display: flex;
+   gap: 0.4rem;
+   justify-content: center;
+   align-items: center;
+}
+
+.help-text>span {
+    display: grid;
+    place-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 5px;
+}
+
+.color-info {
+    border: 2px solid var(--clr-gray-300);
+    border-radius: var(--border-radius-amt);
+    padding: 1rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.color-info .help-text {
+    font-size: 0.8rem;
 }
 
 #word-length {
@@ -358,5 +398,9 @@ main {
         max-width: 3rem;
         font-size: 1rem;
         border-radius: 5px;
+    }
+
+    .color-info .help-text {
+        font-size: 0.7rem;
     }
 }
