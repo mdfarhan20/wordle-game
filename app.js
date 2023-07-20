@@ -2,13 +2,14 @@ const game = document.getElementById("game");
 const keys = document.querySelectorAll(".key");
 const closeMenuBtns = document.querySelectorAll(".close-icon");
 const wordLengthBtns = document.querySelectorAll(".len-option");
+const playAgainBtns = document.querySelectorAll(".play-again-btn");
 
 const gameOverPopup = document.getElementById("game-over");
 const wordRevealEl = document.getElementById("word");
-const playAgainBtn = document.getElementById("play-again-btn");
 const wordNotFoundPopup = document.getElementById("not-found");
 const settingsBtn = document.getElementById("settings-icon");
 const settingsMenu = document.getElementById("settings-menu");
+const gameWonPopup = document.getElementById("game-won")
 
 let wordLength = 5;
 let lettersEntered = 0;
@@ -37,9 +38,12 @@ settingsBtn.addEventListener("click", () => {
     settingsMenu.classList.remove("no-display");
 });
 
-playAgainBtn.addEventListener("click", () => {
-    initializeGame(wordLength);
-    gameOverPopup.classList.add("no-display");
+playAgainBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        initializeGame(wordLength);
+        const popup = btn.parentNode;
+        popup.classList.add("no-display");
+    });
 });
 
 wordLengthBtns.forEach(btn => {
@@ -62,7 +66,8 @@ async function initializeGame(len) {
     guesses = 0;
     wordLength = len;
     createGame(len);
-    word = await getRandomWord(len);
+    // word = await getRandomWord(len);
+    word = 'SINUS';
 }
 
 function createGame(wordLength) {
@@ -118,11 +123,18 @@ async function guessWord() {
             box.classList.add("bg-green")
     }
 
+    if (guessedWord === word) {
+        gameWonPopup.classList.remove("no-display");
+        return;
+    }
+
     for (let letter of word) {
-        if (guessedWord.includes(letter)) {
-            let box = guessRow.children[guessedWord.indexOf(letter)];
-            if (!box.classList.contains("bg-green") && !box.classList.contains("bg-yellow"))
+        for (let i = 0; i < wordLength; i++) {
+            let box = guessRow.children[i];
+            if (letter === guessedWord[i] && !box.classList.contains("bg-green") && !box.classList.contains("bg-yellow")) {
                 box.classList.add("bg-yellow");
+                break;
+            }
         }
     }
 

@@ -198,7 +198,7 @@ main {
     font-weight: var(--fw-bold);
 }
 
-#play-again-btn {
+.play-again-btn {
     padding: 0.6rem 1rem;
     background-color: var(--clr-black);
     color: var(--clr-white);
@@ -208,7 +208,7 @@ main {
     cursor: pointer;
 }
 
-#play-again-btn:hover {
+.play-again-btn:hover {
     background: transparent;
     color: var(--clr-black);
     font-weight: var(--fw-bold);
