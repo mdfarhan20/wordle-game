@@ -391,6 +391,7 @@ main {
 
     #game {
         width: 98%;
+        --block-gap: 0.2rem;
     }
 
     .game-box {
