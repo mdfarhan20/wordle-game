@@ -125,11 +125,15 @@ async function guessWord() {
         return;
     }
     
+    let yellowLetters = '';
     for (let i = 0; i < wordLength; i++) {
         const box = guessRow.children[i];
         box.classList.add("guessed");
-        if (box.textContent === word[i])
-            box.classList.add("bg-green")
+        if (box.textContent === word[i]) {
+            box.classList.add("bg-green");
+            continue;
+        }
+        yellowLetters += word[i];
     }
 
     if (guessedWord === word) {
@@ -137,7 +141,8 @@ async function guessWord() {
         return;
     }
 
-    for (let letter of word) {
+    console.log(yellowLetters);
+    for (let letter of yellowLetters) {
         for (let i = 0; i < wordLength; i++) {
             let box = guessRow.children[i];
             if (letter === guessedWord[i] && !box.classList.contains("bg-green") && !box.classList.contains("bg-yellow")) {
@@ -146,7 +151,7 @@ async function guessWord() {
             }
         }
     }
-
+    
     guesses++;
     lettersEntered = 0;
 
@@ -166,8 +171,10 @@ async function getRandomWord(len) {
     const res = await fetch(apiURL);
     const word = (await res.json())[0].toUpperCase();
     if (await checkWord(word))
+        console.log(word);
         return word;
-    getRandomWord(len);
+
+    return (await getRandomWord(len));
 }
 
 async function checkWord(word) {
