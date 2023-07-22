@@ -157,7 +157,6 @@ async function guessWord() {
         return;
     }
 
-    console.log(yellowLetters);
     for (let letter of yellowLetters) {
         for (let i = 0; i < wordLength; i++) {
             let box = guessRow.children[i];
