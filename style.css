@@ -8,11 +8,11 @@
 :root {
     --font-family-default: 'Poppins', sans-serif;
 
-    --clr-black: #212529;
-    --clr-white: #F8F9FA;
+    --clr-primary: #F8F9FA;
+    --clr-secondary: #212529;
 
-    --clr-gray-100: #E9ECEF;
-    --clr-gray-200: #DEE2E6;
+    --clr-sub-primary: #E9ECEF;
+    --clr-sub-primary-200: #DEE2E6;
     --clr-gray-300: #CED4DA;
     --clr-gray-500: #6C757D;
 
@@ -24,9 +24,18 @@
     --fw-bold: 600;
 }
 
+:root[data-theme='dark'] {
+    --clr-primary: #212529;
+    --clr-secondary: #F8F9FA;
+    --clr-sub-primary: #495057;
+    --clr-sub-primary-200: #343a40;
+    --clr-gray-300: #adb5bd;
+}
+
 body {
     min-height: 100vh;
     font-family: var(--font-family-default);
+    background-color: var(--clr-primary);
 }
 
 .no-display {
@@ -56,7 +65,7 @@ nav {
 
 .title {
     font-size: 2rem;
-    color: var(--clr-black);
+    color: var(--clr-secondary);
     font-weight: var(--fw-bold);
 }
 
@@ -114,7 +123,7 @@ main {
     width: 3.6rem;
     aspect-ratio: 1 / 1;
     font-size: 1.6rem;
-    color: var(--clr-black);
+    color: var(--clr-secondary);
 }
 
 .box-filled {
@@ -152,8 +161,8 @@ main {
 
 .key {
     flex: 1;
-    color: var(--clr-black);
-    background-color: var(--clr-gray-100);
+    color: var(--clr-secondary);
+    background-color: var(--clr-sub-primary);
     padding: 0.8rem 1.4rem;
     text-align: center;
     border-radius: 10px;
@@ -165,7 +174,7 @@ main {
 }
 
 .key:hover {
-    background-color: var(--clr-gray-200);
+    background-color: var(--clr-sub-primary-200);
 }
 
 .key.delete>svg {
@@ -182,8 +191,8 @@ main {
     place-items: center;
     gap: 1rem;
     padding: 2rem;
-    background-color: var(--clr-white);
-    color: var(--clr-black);
+    background-color: var(--clr-primary);
+    color: var(--clr-secondary);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -200,9 +209,9 @@ main {
 
 .play-again-btn {
     padding: 0.6rem 1rem;
-    background-color: var(--clr-black);
-    color: var(--clr-white);
-    border: 2px solid var(--clr-black);
+    background-color: var(--clr-secondary);
+    color: var(--clr-primary);
+    border: 2px solid var(--clr-secondary);
     border-radius: 10px;
     transition: all 0.2s ease;
     cursor: pointer;
@@ -210,7 +219,7 @@ main {
 
 .play-again-btn:hover {
     background: transparent;
-    color: var(--clr-black);
+    color: var(--clr-secondary);
     font-weight: var(--fw-bold);
 }
 
@@ -222,7 +231,6 @@ main {
     top: 0;
     left: 50%;
     translate: -50%;
-    background-color: white;
     display: grid;
     gap: 1rem;
     width: 30rem;
@@ -233,8 +241,8 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--clr-black);
-    color: var(--clr-white);
+    background-color: var(--clr-secondary);
+    color: var(--clr-primary);
     padding: var(--padding-amt);
     border-radius: var(--border-radius-amt);
     box-shadow: var(--box-shadow);
@@ -250,21 +258,54 @@ main {
     gap: 1rem;
 }
 
+.setting {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#word-length,
 .setting,
 .help-info {
     display: grid;
     gap: 1rem;
-    background-color: white;
+    background-color: var(--clr-primary);
     padding: var(--padding-amt);
     border-radius: 10px;
     border-radius: var(--border-radius-amt);
     box-shadow: var(--box-shadow);
-    overflow-y: scroll;
     max-height: 30rem;
+}
+
+.toggle-switch {
+    width: 2.4rem;
+    height: 1.4rem;
+    border-radius: 100vw;
+    background-color: var(--clr-secondary);
+    padding: 5px;
+    cursor: pointer;
+}
+
+.circle {
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background-color: var(--clr-primary);
+}
+
+.switch-on {
+    display: flex;
+    justify-content: end;
+}
+
+.setting-desc {
+    color: var(--clr-gray-500);
+    font-size: 0.9rem;
 }
 
 .help-info {
     text-align: center;
+    overflow-y: scroll;
 }
 
 .help-info .game-row {
@@ -306,7 +347,7 @@ main {
 }
 
 .setting-name {
-    color: var(--clr-black);
+    color: var(--clr-secondary);
     font-weight: var(--fw-bold);
     font-size: 1.2rem;
 }
@@ -335,7 +376,7 @@ main {
 }
 
 .close-icon {
-    fill: var(--clr-white);
+    fill: var(--clr-primary);
     height: fit-content;
     max-width: 100%;
     width: 2.4rem;

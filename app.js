@@ -3,6 +3,7 @@ const keys = document.querySelectorAll(".key");
 const closeMenuBtns = document.querySelectorAll(".close-icon");
 const wordLengthBtns = document.querySelectorAll(".len-option");
 const playAgainBtns = document.querySelectorAll(".play-again-btn");
+const settingToggleBtns = document.querySelectorAll(".toggle-switch");
 
 const gameOverPopup = document.getElementById("game-over");
 const wordRevealEl = document.getElementById("word");
@@ -69,6 +70,21 @@ closeMenuBtns.forEach(btn => {
         const menu = btn.parentNode.parentNode;
         menu.classList.add("no-display");
     })
+});
+
+settingToggleBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        btn.classList.toggle("switch-on");
+
+        if (btn.getAttribute("data-action") === 'theme') {
+            const root = document.documentElement;
+            if (root.hasAttribute("data-theme")) {
+                root.removeAttribute("data-theme");
+                return;
+            }
+            root.setAttribute("data-theme", "dark");
+        }
+    });
 });
 
 async function initializeGame(len) {
