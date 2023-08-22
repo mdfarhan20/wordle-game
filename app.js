@@ -92,6 +92,7 @@ async function initializeGame(len) {
     guesses = 0;
     wordLength = len;
     createGame(len);
+    clearKeyboard();
     word = await getRandomWord(len);
 }
 
@@ -145,8 +146,10 @@ async function guessWord() {
     for (let i = 0; i < wordLength; i++) {
         const box = guessRow.children[i];
         box.classList.add("guessed");
+        updateKeyboard(box.textContent, "guessed");
         if (box.textContent === word[i]) {
             box.classList.add("bg-green");
+            updateKeyboard(box.textContent, "bg-green");
             continue;
         }
         yellowLetters += word[i];
@@ -162,6 +165,7 @@ async function guessWord() {
             let box = guessRow.children[i];
             if (letter === guessedWord[i] && !box.classList.contains("bg-green") && !box.classList.contains("bg-yellow")) {
                 box.classList.add("bg-yellow");
+                updateKeyboard(box.textContent, "bg-yellow");
                 break;
             }
         }
@@ -179,6 +183,30 @@ async function guessWord() {
 
 function displayPopup(popup) {
     popup.classList.remove("no-display");
+}
+
+function updateKeyboard(letter, color) {
+    keys.forEach(key => {
+        if (key.textContent === letter.toLowerCase()) {
+            if (key.classList.contains("bg-green")) return;
+
+            key.classList.remove("bg-green", "bg-yellow", "guessed")
+
+            if (color === "bg-yellow") {
+                if (!key.classList.contains("bg-green"));
+                    key.classList.add(color);
+            } else {
+                if (key.classList.contains("bg-yellow") && color === "guessed") return;
+                key.classList.add(color);
+            }
+        }
+    });
+}
+
+function clearKeyboard() {
+    keys.forEach(key => {
+        key.classList.remove("bg-green", "bg-yellow", "guessed")
+    });
 }
 
 async function getRandomWord(len) {

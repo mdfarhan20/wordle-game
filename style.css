@@ -133,12 +133,12 @@ main {
 
 .guessed {
     color: white;
-    background-color: var(--clr-gray-300);
+    background-color: var(--clr-gray-300) !important;
     border-color: var(--clr-gray-300);
 }
 
 .bg-green {
-    color: white;
+    color: white !important;
     background-color: var(--clr-green) !important;
     border-color: var(--clr-green);
 }
